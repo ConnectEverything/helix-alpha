@@ -24,8 +24,10 @@ EOF
 RNA_CONFIG=$(cat <<EOF
 {
   "env": "local",
-  "postgres_url": "postgres://helix:helix@localhost:5432/helix",
-  "prometheus_url": "http://localhost:9090",
+  "embedded_postgres_enabled": false,
+  "postgres_url": "postgres://helix:helix@postgres:5432/helix",
+  "embedded_prometheus_enabled": false,
+  "prometheus_url": "http://prometheus:9090",
   "logging": {
     "components": {
       "auth": {

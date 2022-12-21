@@ -12,9 +12,27 @@ services:
     ports:
       - 8080:8080
     depends_on:
+      - postgres
+      - prometheus
       - nats-a
       - nats-b
       - nats-c
+
+  postgres:
+    container_name: helix-alpha-postgres
+    image: postgres:15.1
+    environment:
+      POSTGRES_USER: helix
+      POSTGRES_PASSWORD: helix
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  prometheus:
+    container_name: helix-alpha-prometheus
+    image: prom/prometheus
+    volumes:
+      - prom-data:/prometheus
+
 
   nats-bootstrap:
     container_name: nats-bootstrap
@@ -74,3 +92,5 @@ volumes:
   nats-b: {}
   nats-c: {}
   helix-data: {}
+  postgres-data: {}
+  prom-data: {}
